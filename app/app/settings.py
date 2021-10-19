@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-hj!-q=&d%$1m%k6l=j&&dcud#5l%ggik-73h5x2z^i5%30ih5y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'dennis-django-recipe.herokuapp.com']
 
 
 # Application definition
@@ -91,6 +91,15 @@ DATABASES = {
 }
 
 
+"""
+Heroku database settings. 
+"""
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+DATABASES['default'].update(db_from_env)
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -140,9 +149,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
 
-"""
-Heroku database settings. 
-"""
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-DATABASES['default']['CONN_MAX_AGE'] = 500
