@@ -1,2 +1,2 @@
 # Recipe_API
-Recipe app api
+Dockerized recipe app api deployed on heroku
